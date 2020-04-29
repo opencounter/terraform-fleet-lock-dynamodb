@@ -2,8 +2,37 @@ resource aws_api_gateway_rest_api this {
   name = module.label.id
   tags = module.label.tags
 
+  policy = data.aws_iam_policy_document.api_policy.json
+
   endpoint_configuration {
-    types = ["REGIONAL"]
+    types = ["PRIVATE"]
+  }
+}
+
+data aws_iam_policy_document api_policy {
+  statement {
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["execute-api:Invoke"]
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+  }
+
+  statement {
+    effect    = "Deny"
+    resources = ["*"]
+    actions   = ["execute-api:Invoke"]
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "StringNotEquals"
+      variable = "aws:SourceVpc"
+      values   = [var.vpc_id]
+    }
   }
 }
 

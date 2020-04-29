@@ -19,6 +19,10 @@ variable debug_logging {
   default = false
 }
 
+variable vpc_id {
+  type = string
+}
+
 variable alarm_topic_arn {
   type        = string
   description = "ARN of SNS topic to send monitoring alarms to"
