@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "client_params": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "group",
+        "id"
+      ],
+      "additionalProperties": false
+    }
+  },
+ "required": [
+    "client_params"
+  ],
+  "additionalProperties": false
+}
