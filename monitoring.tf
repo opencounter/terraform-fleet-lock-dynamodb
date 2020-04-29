@@ -19,26 +19,26 @@ resource aws_cloudwatch_metric_alarm _5xx_errors {
   tags                = module.label.tags
 }
 
-resource aws_cloudwatch_metric_alarm _4xx_errors {
-  alarm_name        = "${module.label.id}-4xx-errors"
-  alarm_description = "4xx errors occurred in ${aws_api_gateway_rest_api.this.name}"
+# resource aws_cloudwatch_metric_alarm _4xx_errors {
+#   alarm_name        = "${module.label.id}-4xx-errors"
+#   alarm_description = "4xx errors occurred in ${aws_api_gateway_rest_api.this.name}"
 
-  namespace   = "AWS/ApiGateway"
-  metric_name = "4XXError"
-  dimensions = {
-    ApiName = aws_api_gateway_rest_api.this.name
-    Stage   = aws_api_gateway_stage.this.stage_name
-  }
-  statistic           = "Sum"
-  period              = "60"
-  evaluation_periods  = "1"
-  comparison_operator = "GreaterThanThreshold"
-  threshold           = "0"
-  treat_missing_data  = "notBreaching"
-  alarm_actions       = [var.alarm_topic_arn]
-  ok_actions          = [var.alarm_topic_arn]
-  tags                = module.label.tags
-}
+#   namespace   = "AWS/ApiGateway"
+#   metric_name = "4XXError"
+#   dimensions = {
+#     ApiName = aws_api_gateway_rest_api.this.name
+#     Stage   = aws_api_gateway_stage.this.stage_name
+#   }
+#   statistic           = "Sum"
+#   period              = "60"
+#   evaluation_periods  = "1"
+#   comparison_operator = "GreaterThanThreshold"
+#   threshold           = "0"
+#   treat_missing_data  = "notBreaching"
+#   alarm_actions       = [var.alarm_topic_arn]
+#   ok_actions          = [var.alarm_topic_arn]
+#   tags                = module.label.tags
+# }
 
 resource aws_cloudwatch_dashboard this {
   dashboard_name = module.label.id
