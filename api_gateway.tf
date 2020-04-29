@@ -151,21 +151,6 @@ resource aws_api_gateway_deployment this {
   }
 }
 
-resource aws_api_gateway_domain_name this {
-  domain_name              = aws_acm_certificate.this.domain_name
-  regional_certificate_arn = aws_acm_certificate_validation.this.certificate_arn
-
-  endpoint_configuration {
-    types = ["REGIONAL"]
-  }
-}
-
-resource aws_api_gateway_base_path_mapping root {
-  api_id      = aws_api_gateway_rest_api.this.id
-  stage_name  = aws_api_gateway_stage.this.stage_name
-  domain_name = aws_api_gateway_domain_name.this.domain_name
-}
-
 resource aws_api_gateway_model this {
   rest_api_id  = aws_api_gateway_rest_api.this.id
   name         = "FleetLock"
